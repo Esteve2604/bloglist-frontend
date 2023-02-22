@@ -9,9 +9,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
   const [successMessage, setSuccessMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   useEffect(() => {
@@ -28,7 +25,7 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
-
+//title={title} setTitle={setTitle} author={author} setAuthor={setAuthor} url={url} setUrl={setUrl}
   return (
     <div>
       <Notification.SuccessNotification successMessage={successMessage} />
@@ -38,7 +35,7 @@ const App = () => {
           setUsername={setUsername} setPassword={setPassword} setUser={setUser} setErrorMessage={setErrorMessage}/>
         :
         <Blogs blogs={blogs} setBlogs={setBlogs} user={user} setUser={setUser}
-          title={title} setTitle={setTitle} author={author} setAuthor={setAuthor} url={url} setUrl={setUrl} setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage}/>}
+           setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage}/>}
     </div>
   )
 }

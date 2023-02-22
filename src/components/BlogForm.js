@@ -1,7 +1,7 @@
 import FormInput from './FormInput'
 import blogsServices from '../services/blogs'
-
-const BlogForm = ({blogs, setBlogs, title, setTitle, author, setAuthor, url, setUrl,setSuccessMessage, setErrorMessage }) => {
+import Togglable from './Togglable'
+const BlogForm = ({ blogs, setBlogs, title, setTitle, author, setAuthor, url, setUrl, setSuccessMessage, setErrorMessage, user }) => {
     const success = (success) => {
         setSuccessMessage(success)
         setTimeout(() => setSuccessMessage(null), 5000)
@@ -14,6 +14,7 @@ const BlogForm = ({blogs, setBlogs, title, setTitle, author, setAuthor, url, set
         event.preventDefault()
         try {
             const newBlog = await blogsServices.create({ title, author, url })
+            newBlog.user=user
             success(`New Blog ${title} by ${author} added correctly`)
             setBlogs(blogs.concat(newBlog))
             setTitle('')
@@ -28,12 +29,14 @@ const BlogForm = ({blogs, setBlogs, title, setTitle, author, setAuthor, url, set
     return (
         <>
             <h2>Create new blog</h2>
-            <form onSubmit={handleNewBlog}>
-                <FormInput entry={title} setEntry={setTitle} entryName={"Title"} />
-                <FormInput entry={author} setEntry={setAuthor} entryName={"Author"} />
-                <FormInput entry={url} setEntry={setUrl} entryName={"URL"} />
-                <button type="submit">Create</button>
-            </form>
+            <Togglable buttonLabel='create new blog'>
+                <form onSubmit={handleNewBlog}>
+                    <FormInput entry={title} setEntry={setTitle} entryName={"Title"} />
+                    <FormInput entry={author} setEntry={setAuthor} entryName={"Author"} />
+                    <FormInput entry={url} setEntry={setUrl} entryName={"URL"} />
+                    <button type="submit">Create</button>
+                </form>
+            </Togglable>
         </>
     )
 }

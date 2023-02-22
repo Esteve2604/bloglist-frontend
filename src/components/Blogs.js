@@ -1,8 +1,11 @@
 import Blog from './Blog'
 import BlogForm from './BlogForm'
+import { useState } from 'react'
+const Blogs = ({ blogs, setBlogs, user, setUser, setSuccessMessage, setErrorMessage }) => {
 
-const Blogs = ({ blogs, setBlogs, user, setUser, title, setTitle, author, setAuthor, url, setUrl, setSuccessMessage, setErrorMessage }) => {
-
+    const [title, setTitle] = useState('')
+    const [author, setAuthor] = useState('')
+    const [url, setUrl] = useState('')
     const logout = () => () => {
         window.localStorage.removeItem('loggedBlogappUser')
         setUser(null)
@@ -13,10 +16,10 @@ const Blogs = ({ blogs, setBlogs, user, setUser, title, setTitle, author, setAut
         {user.name} logged in <button onClick={logout()}>logout</button>
         <p></p>
         <BlogForm blogs={blogs} setBlogs={setBlogs} title={title} setTitle={setTitle} author={author} setAuthor={setAuthor} url={url} setUrl={setUrl} 
-        setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage}/>
+        setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage} user={user}/>
         {
             blogs.map(blog =>
-                <Blog key={blog.id} blog={blog} />
+                <Blog key={blog.id} blog={blog} blogs={blogs} setBlogs={setBlogs}/>
             )
         }
     </>
