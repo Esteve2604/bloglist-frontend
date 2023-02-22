@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import blogsServices from '../services/blogs'
+import PropTypes from 'prop-types'
 const Blog = ({ blog, blogs, setBlogs }) => {
   const [extra, setExtra] = useState(false)
   const [text, setText] = useState('view')
@@ -10,6 +11,11 @@ const Blog = ({ blog, blogs, setBlogs }) => {
     borderWidth: 1,
     marginBottom: 5
   }
+  Blog.propTypes = {
+    blog: PropTypes.object.isRequired,
+    blogs: PropTypes.array.isRequired,
+    setBlogs: PropTypes.func.isRequired
+  }
   const handleView = () => () => {
     extra === false ? setText('hide') : setText('view')
     setExtra(!extra)
@@ -19,7 +25,11 @@ const Blog = ({ blog, blogs, setBlogs }) => {
     const updatedBlog = await blogsServices.update(blogToUpdate)
     updatedBlog.user = blogToUpdate.user
     const updatedBlogs=((blogs.map(blog => updatedBlog.id.toString() === blog.id.toString() ? updatedBlog : blog)))
-    setBlogs(updatedBlogs.sort((a, b) => a.likes > b.likes ? a : b))
+    setBlogs(updatedBlogs.sort((a, b) => b.likes - a.likes))
+  }
+  const handleRemove = (blogToDelete) => async () => {
+    await blogsServices.remove(blogToDelete)
+    setBlogs(blogs.filter(blog=> blog.id !== blogToDelete.id))
   }
   return (<>
     <div style={blogStyle}>
@@ -31,6 +41,7 @@ const Blog = ({ blog, blogs, setBlogs }) => {
           {blog.user.name}
         </p> : <></>
       }
+      <button onClick={handleRemove(blog)}>remove</button>
     </div>
   </>
   )
