@@ -24,16 +24,16 @@ const Blog = ({ blog, blogs, setBlogs }) => {
     blogToUpdate.likes++
     const updatedBlog = await blogsServices.update(blogToUpdate)
     updatedBlog.user = blogToUpdate.user
-    const updatedBlogs=((blogs.map(blog => updatedBlog.id.toString() === blog.id.toString() ? updatedBlog : blog)))
+    const updatedBlogs = ((blogs.map(blog => updatedBlog.id.toString() === blog.id.toString() ? updatedBlog : blog)))
     setBlogs(updatedBlogs.sort((a, b) => b.likes - a.likes))
   }
   const handleRemove = (blogToDelete) => async () => {
     await blogsServices.remove(blogToDelete)
-    setBlogs(blogs.filter(blog=> blog.id !== blogToDelete.id))
+    setBlogs(blogs.filter(blog => blog.id !== blogToDelete.id))
   }
   return (<>
     <div style={blogStyle}>
-      {blog.title} {blog.author} <button onClick={handleView()}>{`${text}`}</button>
+      <p className='blogshort'>{blog.title} {blog.author} <button onClick={handleView()}>{`${text}`}</button> </p>
       {extra === true ?
         <p>
           {blog.url} <br></br>
