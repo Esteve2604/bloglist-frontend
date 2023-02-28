@@ -1,0 +1,2 @@
+run test without jesy waiting for changes:
+$env:CI=$true; npm test
