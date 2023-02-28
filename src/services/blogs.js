@@ -23,7 +23,7 @@ const update = async blog => {
     headers: { Authorization: token },
   }
   const blogToUpdate = {
-    user: blog.user.id.toString(),
+   // user: blog.user.id.toString(),
     likes: blog.likes,
     author: blog.author,
     title: blog.title,
