@@ -1,2 +1,4 @@
 run test without jesy waiting for changes:
 $env:CI=$true; npm test
+
+should assertion with cypress: https://docs.cypress.io/guides/references/assertions#Common-Assertions

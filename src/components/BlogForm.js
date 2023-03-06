@@ -34,7 +34,7 @@ const BlogForm = ({ blogs, setBlogs, title, setTitle, author, setAuthor, url, se
                     <FormInput entry={title} setEntry={setTitle} entryName={"Title"} />
                     <FormInput entry={author} setEntry={setAuthor} entryName={"Author"} />
                     <FormInput entry={url} setEntry={setUrl} entryName={"URL"} />
-                    <button type="submit">Create</button>
+                    <button id='create-button' type="submit">Create</button>
                 </form>
             </Togglable>
         </>
