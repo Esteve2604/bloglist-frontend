@@ -13,7 +13,7 @@ const Blogs = ({ blogs, setBlogs, user, setUser, setSuccessMessage, setErrorMess
 
     return (<>
         <h2>Blogs</h2>
-        {user.name} logged in <button onClick={logout()}>logout</button>
+        {user.name} logged in <button id= 'logout-button' onClick={logout()}>logout</button>
         <p></p>
         <BlogForm blogs={blogs} setBlogs={setBlogs} title={title} setTitle={setTitle} author={author} setAuthor={setAuthor} url={url} setUrl={setUrl} 
         setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage} user={user}/>

@@ -31,17 +31,18 @@ const Blog = ({ blog, blogs, setBlogs }) => {
     await blogsServices.remove(blogToDelete)
     setBlogs(blogs.filter(blog => blog.id !== blogToDelete.id))
   }
+  const loggedUser=JSON.parse(window.localStorage.getItem('loggedBlogappUser'))
   return (<>
     <div style={blogStyle}>
       <p className='blogshort'>{blog.title} {blog.author} <button onClick={handleView()}>{`${text}`}</button> </p>
       {extra === true ?
         <p>
           {blog.url} <br></br>
-          {blog.likes} <button onClick={handleLikes(blog)}>like</button> <br></br>
+          {blog.likes} <button id='like-button' onClick={handleLikes(blog)}>like</button> <br></br>
           {blog.user.name}
         </p> : <></>
       }
-      <button onClick={handleRemove(blog)}>remove</button>
+      {loggedUser.username==blog.user.username ? <button id='remove-button' onClick={handleRemove(blog)}>remove</button> : <></>}
     </div>
   </>
   )
