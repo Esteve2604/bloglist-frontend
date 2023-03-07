@@ -36,7 +36,7 @@ const Blog = ({ blog, blogs, setBlogs }) => {
     <div style={blogStyle}>
       <p className='blogshort'>{blog.title} {blog.author} <button onClick={handleView()}>{`${text}`}</button> </p>
       {extra === true ?
-        <p>
+        <p className='blogLong'>
           {blog.url} <br></br>
           {blog.likes} <button id='like-button' onClick={handleLikes(blog)}>like</button> <br></br>
           {blog.user.name}
